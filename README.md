@@ -25,8 +25,8 @@ import(
 )
 
 func main(){
-	p := p.NewPassword(sha1.New, 8, 32,15000)
-	hashed := p.HashPassword("123456")
+	pass := p.NewPassword(sha1.New, 8, 32,15000)
+	hashed := pass.HashPassword("123456")
 	fmt.Println(hashed.CipherText)
 	fmt.Println(hashed.Salt)
 }
@@ -43,12 +43,12 @@ import(
 )
 
 func main(){
-	p := p.NewPassword(sha1.New, 8, 32,15000)
-	hashed := p.HashPassword("123456")
+	pass := p.NewPassword(sha1.New, 8, 32,15000)
+	hashed := pass.HashPassword("123456")
 	fmt.Println(hashed.CipherText)
 	fmt.Println(hashed.Salt)
 	
-	isValid, err := p.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
+	isValid, err := pass.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
 	if err != nil {
 		panic(err)
 	}
@@ -73,7 +73,7 @@ func main(){
 	```
 	this function returning HashResult(struct) Which has two fields, CiphertText and Salt
 
-- **func VerifyPassword
+- **func VerifyPassword**
 	```go
 	func VerifyPassword("123456", hashed.CipherText, hashed.Salt) (bool, error)
 	```
