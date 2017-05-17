@@ -47,7 +47,7 @@ func main(){
 	hashed := pass.HashPassword("123456")
 	fmt.Println(hashed.CipherText)
 	fmt.Println(hashed.Salt)
-	
+
 	isValid, err := pass.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
 	if err != nil {
 		panic(err)
@@ -75,7 +75,6 @@ func main(){
 
 - **func VerifyPassword**
 	```go
-	func VerifyPassword("123456", hashed.CipherText, hashed.Salt) (bool, error)
+	func VerifyPassword("123456", hashed.CipherText, hashed.Salt) (bool)
 	```
-	this function returning true if your password is valid and false otherwise, also return error if error occurred
-
+	this function returning true if your password is valid and false otherwise
