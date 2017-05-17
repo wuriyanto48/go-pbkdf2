@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/wuriyanto48/go-pbkdf2.svg?branch=master)](https://travis-ci.org/wuriyanto48/go-pbkdf2)
+
 # GO PBKDF2
 
 PBKDF2 (Password-Based Key Derivation Function 2) https://en.wikipedia.org/wiki/PBKDF2
@@ -49,7 +51,7 @@ func main(){
 	fmt.Println(hashed.Salt)
 
 	isValid := pass.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
-	
+
 	fmt.Println(isValid)
 }
 ```
