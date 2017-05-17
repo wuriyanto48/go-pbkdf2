@@ -48,10 +48,8 @@ func main(){
 	fmt.Println(hashed.CipherText)
 	fmt.Println(hashed.Salt)
 
-	isValid, err := pass.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
-	if err != nil {
-		panic(err)
-	}
+	isValid := pass.VerifyPassword("123456", hashed.CipherText, hashed.Salt)
+	
 	fmt.Println(isValid)
 }
 ```
