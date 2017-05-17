@@ -65,7 +65,7 @@ func main(){
 	the drafted v2.1 specification allows use of all five FIPS Approved
 	Hash Functions SHA-1, SHA-224, SHA-256, SHA-384 and SHA-512 for HMAC. To
 	choose, you can pass the `New` functions from the different SHA packages to
-	pbkdf2.Key. Source [Official GODOC] (https://godoc.org/golang.org/x/crypto/pbkdf2) .
+	pbkdf2.Key.
 
 - **func HashPassword**
 	```go
@@ -78,3 +78,9 @@ func main(){
 	func VerifyPassword("123456", hashed.CipherText, hashed.Salt) (bool)
 	```
 	this function returning true if your password is valid and false otherwise
+	
+	
+	
+	##
+	
+	Wuriyanto Musobar 2017
