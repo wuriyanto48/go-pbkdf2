@@ -10,6 +10,8 @@ https://godoc.org/golang.org/x/crypto/pbkdf2
 
 # USAGE
 
+## Use as a library
+
 - **get first:**
 
 ```shell
@@ -54,6 +56,18 @@ func main(){
 
 	fmt.Println(isValid)
 }
+```
+
+## Use as a binary
+
+build
+```shell
+$ make build
+```
+
+show available options
+```shell
+$ ./go-pbkdf2 -h
 ```
 
 # Doc
