@@ -6,9 +6,10 @@ package p
 import (
 	"bytes"
 	"encoding/base64"
-	"golang.org/x/crypto/pbkdf2"
 	"hash"
 	"math/rand"
+
+	"golang.org/x/crypto/pbkdf2"
 )
 
 type Password struct {
