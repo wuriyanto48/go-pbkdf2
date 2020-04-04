@@ -30,3 +30,17 @@ func TestPbkdf2ReturnTrue(t *testing.T) {
 		t.Log("Verify Password was expected to return true : ", isValid)
 	}
 }
+
+func BenchmarkPBKDF2HashOneThousandIterations(b *testing.B) {
+	pass := NewPassword(sha1.New, 64, 64, 1000)
+	for i := 0; i < b.N; i++ {
+		pass.HashPassword("12345")
+	}
+}
+
+func BenchmarkPBKDF2HashFifteenThousandIterations(b *testing.B) {
+	pass := NewPassword(sha1.New, 64, 64, 15000)
+	for i := 0; i < b.N; i++ {
+		pass.HashPassword("12345")
+	}
+}
