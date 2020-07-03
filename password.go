@@ -8,6 +8,7 @@ import (
 	"encoding/base64"
 	"hash"
 	"math/rand"
+	"time"
 
 	"golang.org/x/crypto/pbkdf2"
 )
@@ -33,10 +34,15 @@ func NewPassword(diggest func() hash.Hash, saltSize int, keyLen int, iter int) *
 	}
 }
 
-func (p *Password) HashPassword(password string) HashResult {
+func (p *Password) genSalt() string {
 	saltBytes := make([]byte, p.SaltSize)
+	rand.Seed(time.Now().UnixNano())
 	rand.Read(saltBytes)
-	saltString := base64.StdEncoding.EncodeToString(saltBytes)
+	return base64.StdEncoding.EncodeToString(saltBytes)
+}
+
+func (p *Password) HashPassword(password string) HashResult {
+	saltString := p.genSalt()
 	salt := bytes.NewBufferString(saltString).Bytes()
 	df := pbkdf2.Key([]byte(password), salt, p.Iterations, p.KeyLen, p.Diggest)
 	cipherText := base64.StdEncoding.EncodeToString(df)
@@ -47,6 +53,5 @@ func (p *Password) VerifyPassword(password, cipherText, salt string) bool {
 	saltBytes := bytes.NewBufferString(salt).Bytes()
 	df := pbkdf2.Key([]byte(password), saltBytes, p.Iterations, p.KeyLen, p.Diggest)
 	newCipherText := base64.StdEncoding.EncodeToString(df)
-	valid := newCipherText == cipherText
-	return valid
+	return newCipherText == cipherText
 }
