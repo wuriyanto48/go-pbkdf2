@@ -13,8 +13,8 @@ func TestPbkdf2ReturnFalse(t *testing.T) {
 
 	isValid := pass.VerifyPassword("1234", cipherText, salt)
 
-	if !isValid {
-		t.Log("Verify Password was expected to return false : ", isValid)
+	if isValid {
+		t.Error("Verify Password was expected to return false : but result is ", isValid)
 	}
 }
 
@@ -25,9 +25,8 @@ func TestPbkdf2ReturnTrue(t *testing.T) {
 	salt := hashed.Salt
 
 	isValid := pass.VerifyPassword("12345", cipherText, salt)
-
-	if isValid {
-		t.Log("Verify Password was expected to return true : ", isValid)
+	if !isValid {
+		t.Error("Verify Password was expected to return true : but result is ", isValid)
 	}
 }
 
