@@ -43,3 +43,13 @@ func BenchmarkPBKDF2HashFifteenThousandIterations(b *testing.B) {
 		pass.HashPassword("12345")
 	}
 }
+
+func BenchmarkPBKDF2Verify(b *testing.B) {
+	pass := NewPassword(sha1.New, 64, 64, 1000)
+	hashed := pass.HashPassword("12345")
+	cipherText := hashed.CipherText
+	salt := hashed.Salt
+	for i := 0; i < b.N; i++ {
+		pass.VerifyPassword("12345", cipherText, salt)
+	}
+}
