@@ -58,6 +58,8 @@ func (p *Password) VerifyPassword(password, cipherText, salt string) bool {
 }
 
 // check per bit by applying bitwise XOR
+// first, decode the base64 string to bytes
+// for example
 // 114  1110010
 // 114  1110010
 // ----------------- xor
