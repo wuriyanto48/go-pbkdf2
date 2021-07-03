@@ -52,9 +52,8 @@ func (p *Password) HashPassword(password string) HashResult {
 func (p *Password) VerifyPassword(password, cipherText, salt string) bool {
 	saltBytes := bytes.NewBufferString(salt).Bytes()
 	df := pbkdf2.Key([]byte(password), saltBytes, p.Iterations, p.KeyLen, p.Diggest)
-	newCipherText := base64.StdEncoding.EncodeToString(df)
 
-	return slowEqual(cipherText, newCipherText)
+	return slowEqual(cipherText, df)
 }
 
 // check per bit by applying bitwise XOR
@@ -64,13 +63,12 @@ func (p *Password) VerifyPassword(password, cipherText, salt string) bool {
 // 114  1110010
 // ----------------- xor
 //      000000
-func slowEqual(cipherText, newCipherText string) bool {
+func slowEqual(cipherText string, newCipherText []byte) bool {
 	x, _ := base64.StdEncoding.DecodeString(cipherText)
-	y, _ := base64.StdEncoding.DecodeString(newCipherText)
-	diff := uint64(len(x)) ^ uint64(len(y))
+	diff := uint64(len(x)) ^ uint64(len(newCipherText))
 
-	for i := 0; i < len(x) && i < len(y); i++ {
-		diff |= uint64(x[i]) ^ uint64(y[i])
+	for i := 0; i < len(x) && i < len(newCipherText); i++ {
+		diff |= uint64(x[i]) ^ uint64(newCipherText[i])
 	}
 
 	return diff == 0
