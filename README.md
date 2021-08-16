@@ -1,8 +1,9 @@
-[![Build Status](https://travis-ci.org/wuriyanto48/go-pbkdf2.svg?branch=master)](https://travis-ci.org/wuriyanto48/go-pbkdf2)
-
 # GO PBKDF2
 
 PBKDF2 (Password-Based Key Derivation Function 2) https://en.wikipedia.org/wiki/PBKDF2
+
+[![Build Status](https://travis-ci.org/wuriyanto48/go-pbkdf2.svg?branch=master)](https://travis-ci.org/wuriyanto48/go-pbkdf2)
+[![go-pbkdf2 CI](https://github.com/wuriyanto48/go-pbkdf2/actions/workflows/ci.yml/badge.svg)](https://github.com/wuriyanto48/go-pbkdf2/actions/workflows/ci.yml)
 
 **This Implementation Based On**
 Package pbkdf2 implements the key derivation function PBKDF2 as defined in RFC 2898 / PKCS #5 v2.0.
