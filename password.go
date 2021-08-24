@@ -13,6 +13,11 @@ import (
 	"golang.org/x/crypto/pbkdf2"
 )
 
+const (
+	// MinSaltSize a minimum salt size recommended by the RFC
+	MinSaltSize = 8
+)
+
 type Password struct {
 	Diggest    func() hash.Hash
 	SaltSize   int
@@ -26,6 +31,10 @@ type HashResult struct {
 }
 
 func NewPassword(diggest func() hash.Hash, saltSize int, keyLen int, iter int) *Password {
+	if saltSize < MinSaltSize {
+		saltSize = MinSaltSize
+	}
+
 	return &Password{
 		Diggest:    diggest,
 		SaltSize:   saltSize,

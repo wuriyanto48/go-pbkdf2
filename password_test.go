@@ -1,12 +1,12 @@
 package p
 
 import (
-	"crypto/sha1"
+	"crypto/sha256"
 	"testing"
 )
 
 func TestPbkdf2ReturnFalse(t *testing.T) {
-	pass := NewPassword(sha1.New, 64, 64, 15000)
+	pass := NewPassword(sha256.New, 64, 64, 15000)
 	hashed := pass.HashPassword("12345")
 	cipherText := hashed.CipherText
 	salt := hashed.Salt
@@ -19,7 +19,7 @@ func TestPbkdf2ReturnFalse(t *testing.T) {
 }
 
 func TestPbkdf2ReturnTrue(t *testing.T) {
-	pass := NewPassword(sha1.New, 64, 64, 15000)
+	pass := NewPassword(sha256.New, 7, 64, 15000)
 	hashed := pass.HashPassword("12345")
 	cipherText := hashed.CipherText
 	salt := hashed.Salt
@@ -31,21 +31,21 @@ func TestPbkdf2ReturnTrue(t *testing.T) {
 }
 
 func BenchmarkPBKDF2HashOneThousandIterations(b *testing.B) {
-	pass := NewPassword(sha1.New, 64, 64, 1000)
+	pass := NewPassword(sha256.New, 64, 64, 1000)
 	for i := 0; i < b.N; i++ {
 		pass.HashPassword("12345")
 	}
 }
 
 func BenchmarkPBKDF2HashFifteenThousandIterations(b *testing.B) {
-	pass := NewPassword(sha1.New, 64, 64, 15000)
+	pass := NewPassword(sha256.New, 64, 64, 15000)
 	for i := 0; i < b.N; i++ {
 		pass.HashPassword("12345")
 	}
 }
 
 func BenchmarkPBKDF2Verify(b *testing.B) {
-	pass := NewPassword(sha1.New, 64, 64, 1000)
+	pass := NewPassword(sha256.New, 64, 64, 1000)
 	hashed := pass.HashPassword("12345")
 	cipherText := hashed.CipherText
 	salt := hashed.Salt
