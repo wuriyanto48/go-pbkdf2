@@ -5,10 +5,9 @@ package p
 
 import (
 	"bytes"
+	"crypto/rand"
 	"encoding/base64"
 	"hash"
-	"math/rand"
-	"time"
 
 	"golang.org/x/crypto/pbkdf2"
 )
@@ -45,8 +44,10 @@ func NewPassword(diggest func() hash.Hash, saltSize int, keyLen int, iter int) *
 
 func (p *Password) genSalt() string {
 	saltBytes := make([]byte, p.SaltSize)
-	rand.Seed(time.Now().UnixNano())
-	rand.Read(saltBytes)
+	_, err := rand.Read(saltBytes)
+	if err != nil {
+		panic(err)
+	}
 	return base64.StdEncoding.EncodeToString(saltBytes)
 }
 
