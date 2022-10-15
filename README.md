@@ -13,7 +13,7 @@ https://godoc.org/golang.org/x/crypto/pbkdf2
 
 ## Use as a library
 
-- **get first:**
+- **Install:**
 
 ```shell
 go get github.com/wuriyanto48/go-pbkdf2
